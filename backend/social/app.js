@@ -29,6 +29,10 @@ app.post('/tenant_profie',(req,res)=>
 	{
 		res.send({"Result":"Record Inserted "});
 		console.log(_id);
+	},(err)=>
+	{
+		res.send({"Result":"Error: Please Check Your Data"});
+		console.log(err.stack);
 	});
 })	
 
@@ -40,6 +44,10 @@ app.post('/user_profile',(req,res)=>
 	{
 		res.send({"Result":"Record Inserted "});
 		console.log(_id);
+	},(err)=>
+	{
+		res.send({"Result":"Error: Please Check Your Data"});
+		console.log(err.stack);
 	});
 })	
 
@@ -82,6 +90,10 @@ app.delete('/tenant_profie/:id',(req,res)=>
 	databaseConfig('Tenant_Profile').where("tenant_id",req.params.id).del().then((count)=>
 	{
 		res.send({"Result":"Deleted Records : "+ count});
+	},(err)=>
+	{
+		res.send({"Result":"Error: Please Check Your Data"});
+		console.log(err.stack);
 	});
 })
 
@@ -90,6 +102,10 @@ app.delete('/user_profile/:id',(req,res)=>
 	databaseConfig('User_Profile').where("user_id",req.params.id).del().then((count)=>
 	{
 		res.send({"Result":"Deleted Records : "+ count});
+	},(err)=>
+	{
+		res.send({"Result":"Error: Please Check Your Data"});
+		console.log(err.stack);
 	});
 })
 
@@ -98,6 +114,10 @@ app.patch('/tenant_profie/:id',(req,res)=>
 	databaseConfig('Tenant_Profile').where("tenant_id",req.params.id).update(req.body).then((count)=>
 	{
 		res.send({"Result":"Updated Records : "+ count});
+	},(err)=>
+	{
+		res.send({"Result":"Error: Please Check Your Data"});
+		console.log(err.stack);
 	});
 })
 
@@ -106,6 +126,10 @@ app.patch('/user_profile/:id',(req,res)=>
 	databaseConfig('User_Profile').where("user_id",req.params.id).update(req.body).then((count)=>
 	{
 		res.send({"Result":"Updated Records : "+ count});
+	},(err)=>
+	{
+		res.send({"Result":"Error: Please Check Your Data"});
+		console.log(err.stack);
 	});
 })
 
@@ -121,9 +145,9 @@ async function  check_params( json, paramlist)
 	return jsd;
 }
 
-app.listen(process.env.PORT || 4000, async () => {
+app.listen(process.env.SOCIAL_PORT || 5000, async () => {
 	
-	console.log('App started at port', process.env.PORT || 4000);
+	console.log('App started at port', process.env.SOCIAL_PORT || 5000);
 	//console.log(databaseConfig);
 	
 	//await initProducer();
